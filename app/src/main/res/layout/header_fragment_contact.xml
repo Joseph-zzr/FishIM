@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.coderpig.fishim.utils.MyConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/ll_contact_invite"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:src="@drawable/ease_new_friends_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="好友邀请"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <View
+        app:layout_constraintTop_toBottomOf="@id/ll_contact_invite"
+        app:layout_constraintBottom_toTopOf="@id/ll_contact_group"
+        android:background="@color/gray_normal"
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:id="@+id/ll_contact_group"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ll_contact_invite"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:src="@drawable/ease_group_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="群组"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</com.coderpig.fishim.utils.MyConstraintLayout>
