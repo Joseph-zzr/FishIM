@@ -3,13 +3,19 @@ package com.hyphenate.easeui.ui;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ClipboardManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.provider.MediaStore;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.text.TextUtils;
@@ -137,9 +143,28 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     // "正在输入"功能的开关，打开后本设备发送消息将持续发送cmd类型消息通知对方"正在输入"
     private boolean turnOnTyping;
 
+    private Context mContext;
+
+    public EaseChatFragment() {
+    }
+
+    public EaseChatFragment(Context context) {
+        this.mContext = context;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.ease_fragment_chat, container, false);
+
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, boolean roaming) {
@@ -1046,19 +1071,49 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     /**
      * capture new image
      */
-    protected void selectPicFromCamera() {
-        if (!EaseCommonUtils.isSdcardExist()) {
-            Toast.makeText(getActivity(), R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
-            return;
-        }
+     void selectPicFromCamera() {
+         Toast.makeText(mContext, "该功能还在开发.....", Toast.LENGTH_SHORT).show();
 
-        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
-                + System.currentTimeMillis() + ".jpg");
-        //noinspection ResultOfMethodCallIgnored
-        cameraFile.getParentFile().mkdirs();
-        startActivityForResult(
-                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, EaseCompat.getUriForFile(getContext(), cameraFile)),
-                REQUEST_CODE_CAMERA);
+        //        if (!EaseCommonUtils.isSdcardExist()) {
+//            Toast.makeText(getActivity(), R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+
+//        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
+//                + System.currentTimeMillis() + ".jpg");
+//        //noinspection ResultOfMethodCallIgnored
+//        cameraFile.getParentFile().mkdirs();
+////       startActivityForResult(
+////                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, EaseCompat.getUriForFile(getContext(), cameraFile)),
+////                REQUEST_CODE_CAMERA);
+////为了兼容Android 7.0+，使用FileProvider
+//        Uri fileUri = null;
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+//            //Android 7.0以下
+//            fileUri = Uri.fromFile(cameraFile);
+//        } else {
+//            //Android 7.0及以上
+//            fileUri = FileProvider.getUriForFile(getActivity(), "com.hyphenate.easeui.provider", cameraFile);
+//        }
+//        startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, fileUri), REQUEST_CODE_CAMERA);
+//
+//        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
+//                + System.currentTimeMillis() + ".jpg");
+//        cameraFile.getParentFile().mkdirs();
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//            ContentValues contentValues = new ContentValues(1);
+//            contentValues.put(MediaStore.Images.Media.DATA, cameraFile.getAbsolutePath());
+//            Uri uri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+//            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+//            startActivityForResult(intent, REQUEST_CODE_CAMERA);
+//
+//        } else {
+//            startActivityForResult(
+//                    new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
+//                    REQUEST_CODE_CAMERA);
+//        }
     }
 
     /**

@@ -9,6 +9,10 @@ import com.coderpig.fishim.model.dao.InviteTable;
 
 import androidx.annotation.Nullable;
 
+/**
+ * 创建联系人数据库和邀请信息的数据库
+ */
+
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(@Nullable Context context, @Nullable String name) {
         super(context, name, null,1);

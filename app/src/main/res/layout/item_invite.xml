@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/im_item_invite"
+        android:src="@drawable/em_default_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tx_item_name"
+        android:text="名称"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/im_item_invite"
+        android:layout_marginLeft="5dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tx_item_respone"
+        android:text="加好友原因"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/im_item_invite"
+        app:layout_constraintTop_toBottomOf="@+id/tx_item_name"
+        android:layout_marginLeft="5dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_item_refuse"
+        android:text="拒绝"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_item_accept"
+        android:text="接受"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toLeftOf="@+id/btn_item_refuse"
+        android:layout_marginLeft="5dp"
+        tools:ignore="MissingConstraints" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

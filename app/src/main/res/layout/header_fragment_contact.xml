@@ -24,6 +24,14 @@
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/iv_contact_red"
+            android:src="@android:drawable/ic_notification_overlay"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
     <View
         app:layout_constraintTop_toBottomOf="@id/ll_contact_invite"

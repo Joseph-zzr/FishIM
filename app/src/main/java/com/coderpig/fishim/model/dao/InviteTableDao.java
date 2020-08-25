@@ -1,9 +1,12 @@
-package com.coderpig.fishim.model.bean;
+package com.coderpig.fishim.model.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.coderpig.fishim.model.bean.GroupInfo;
+import com.coderpig.fishim.model.bean.InvitationInfo;
+import com.coderpig.fishim.model.bean.UserInfo;
 import com.coderpig.fishim.model.dao.InviteTable;
 import com.coderpig.fishim.model.db.DBHelper;
 
@@ -187,7 +190,7 @@ public class InviteTableDao {
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
         //执行删除语句
-        db.delete(InviteTable.TAB_NAME,InviteTable.COL_GROUP_HXID + "=?",new String[]{hxId});
+        db.delete(InviteTable.TAB_NAME,InviteTable.COL_USER_HXID + "=?",new String[]{hxId});
     }
 
     // 更新邀请状态

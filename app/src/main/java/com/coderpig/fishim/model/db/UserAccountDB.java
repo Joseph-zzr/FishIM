@@ -8,6 +8,10 @@ import com.coderpig.fishim.model.dao.UserAccountTable;
 
 import androidx.annotation.Nullable;
 
+/**
+ * 本机用户的表
+ */
+
 public class UserAccountDB extends SQLiteOpenHelper {
     public UserAccountDB(@Nullable Context context) {
         super(context, "account.db",null,1);

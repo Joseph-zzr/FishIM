@@ -1,17 +1,20 @@
 package com.coderpig.fishim;
 
 import android.app.Application;
+import android.content.Context;
 import android.view.Display;
 
 import com.coderpig.fishim.model.Model;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.EaseUI;
 
 /**
  * 初始化环信EaseUI
  */
 
 public class IMApplication extends Application {
+    private static Context mContext;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -26,8 +29,21 @@ public class IMApplication extends Application {
         EMClient.getInstance().init(this, options);
 //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
         EMClient.getInstance().setDebugMode(true);
+        //初始ui
+        EaseUI.getInstance().init(this, null);
 
         //初始化数据模型层类
         Model.getInstance().init(this);
+
+        //初始化全局上下文
+        mContext = this;
+    }
+
+    /**
+     * 全局上下文对象
+     * @return
+     */
+    public static Context getGlobalApplication(){
+        return mContext;
     }
 }

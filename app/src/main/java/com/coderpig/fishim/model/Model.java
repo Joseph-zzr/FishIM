@@ -2,7 +2,10 @@ package com.coderpig.fishim.model;
 
 import android.content.Context;
 
+import com.coderpig.fishim.model.bean.UserInfo;
 import com.coderpig.fishim.model.dao.UserAccountDao;
+import com.coderpig.fishim.model.db.DBHelper;
+import com.coderpig.fishim.model.db.DBManager;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,6 +22,8 @@ public class Model {
     //创建对象
     private static Model model = new Model();
     private UserAccountDao userAccountDao;
+    private DBManager dbManager;
+    private EventListener eventListener;
 
     //私有化构造
     private Model(){
@@ -33,7 +38,11 @@ public class Model {
         mContext = context;
 
         //创建用户账号数据库的操作类对象
-        userAccountDao = new UserAccountDao(context);
+        userAccountDao = new UserAccountDao(mContext);
+
+        //开启全局监听
+        eventListener = new EventListener(mContext);
+        System.out.println();
     }
 
     /**
@@ -47,7 +56,18 @@ public class Model {
     /**
      * 用户登录成功后的处理方法
      */
-    public void logininSuccess() {
+    public void logininSuccess(UserInfo account) {
+        if (account == null){
+            return;
+        }
+        if (dbManager != null){
+            dbManager.close();
+        }
+        dbManager = new DBManager(mContext,account.getName());
+    }
+
+    public DBManager getDbManager() {
+        return dbManager;
     }
 
     /**

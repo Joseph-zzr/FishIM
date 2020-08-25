@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 联系人表的操作类
+ * “联系人”表的操作类
  */
 
 public class ContactTabDao {
@@ -114,7 +114,7 @@ public class ContactTabDao {
         values.put(ContactTable.COL_PHOTO,user.getPhoto());
         values.put(ContactTable.COL_IS_CONTACT,isMyContact ? 1:0);
 
-        db.replace(ContactTable.COL_NAME,null,values);
+        db.replace(ContactTable.TAB_NAME,null,values);
     }
 
     // 保存联系人信息

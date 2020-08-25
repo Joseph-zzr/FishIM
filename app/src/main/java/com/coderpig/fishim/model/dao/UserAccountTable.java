@@ -1,7 +1,7 @@
 package com.coderpig.fishim.model.dao;
 
 /**
- *
+ *储存用户信息
  */
 
 public class UserAccountTable {
